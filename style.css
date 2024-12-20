@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+:root {
+    --gradient1:#807ECE;
+    --gradient2:#8E7ECE;
+    --primary-color: #2D2A37 ;
+    --secondary-color:#462878;
+    --secondary-button-color:#7F45E2;
+    --text-color: #6B6B6B;
+    --white:white;
+  }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Rubik", sans-serif;
+}
+
+body{
+    background-image: linear-gradient(to bottom, var(--gradient1), var(--gradient2));
+    color: var(--white);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:3em;
+}
+.cronometro{
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    height: 50vh;
+    width: 25vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center ;
+    border-radius: 10px;
+}
+#timer{
+    padding: 5px;
+    width: 250px;
+    height: 50px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    font-size: 2em;
+    font-family: "Rubik", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    padding: 0.3rem;
+}
+.actions{
+    width: 25vw;
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+button{
+    width:2em;
+    height:2em;
+    font-size: 1.2em;
+}
+button:active {
+    transform: translateY(-3px); 
+    box-shadow: 5px 5px 12px 4px rgba(0, 0, 0, 0.4); 
+}
