@@ -1,9 +1,13 @@
 const icone = document.querySelector('#icone-play');
-const button = document.querySelector('#play');
+const buttonPlay = document.querySelector('#play');
+const buttonReset = document.querySelector('#reset');
+const buttonMark = document.querySelector('#mark');
 const display = document.querySelector('#timer')
-let iniciado = false
+const marksList = document.querySelector('.marks')
+var iniciado = false
 var mili = 0
-let temporizador
+var temporizador
+var tempos = []
 
 function formataTime (time){
     // tenho que entender melhor essa porra da conversao do tempo
@@ -19,13 +23,18 @@ function formataTime (time){
 
 }
 
-button.addEventListener('click', iniciarParar)
-function iniciarParar (){
+function escreveTempo (tempo) {
+    display.innerText = formataTime(tempo)
+}
 
+function iniciarParar (){
     if (iniciado){
         // clear interva se ele limpa nao deveria tambem apagar o valor porque ele volta de onde parou
         clearInterval(temporizador)
         escreveTempo(mili)
+        icone.classList.remove('bi-pause')
+        icone.classList.add('bi-play') 
+        
     }
     else{
         temporizador = setInterval( () =>{
@@ -33,12 +42,39 @@ function iniciarParar (){
             escreveTempo(mili)
         }
         ,10)
-        icone.classList.toggle('bi-play')
-        icone.classList.toggle('bi-pause') 
+        icone.classList.remove('bi-play')
+        icone.classList.add('bi-pause')
     }
     iniciado = !iniciado
 }
 
-function escreveTempo (tempo) {
-    display.innerText = formataTime(tempo)
+function restart(){
+    mili = 0
+    clearInterval(temporizador)
+    display.innerText = '00:00:00:00'
+    icone.classList.add('bi-play')
+    iniciado = false
 }
+function mark(){
+    if (tempos.length < 5){
+        clearInterval(temporizador)
+        tempos.push(formataTime(mili))
+        salva(tempos.length,mili)
+    }
+    else{
+        alert('Você pode salvar no maximo 5 tempos')
+    }
+
+}
+
+function salva(idx,temp){
+    // se apagar da pra fazer com forEach so adicionando na lista o que da a possibilidade de usar o local storage
+    // marksList.innerText = ''
+    marksList.innerHTML += `<p> ${idx} | ${formataTime(temp)} </p>`
+    
+}
+
+
+buttonPlay.addEventListener('click', iniciarParar)
+buttonReset.addEventListener('click', restart)
+buttonMark.addEventListener('click', mark)
